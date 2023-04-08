@@ -75,11 +75,11 @@ func UserLogin(c *gin.Context) {
 		return
 	}
 
-	// token := helpers.GenerateToken(User.ID, User.Email)
-	token, role := helpers.GenerateToken(User.ID, User.Email, User.Role)
+	token := helpers.GenerateToken(User.ID, User.Email)
+	// token, role := helpers.GenerateToken(User.ID, User.Email, User.Role)
 
 	c.JSON(http.StatusOK, gin.H{
-		"token":     token,
-		"user_role": role,
+		"token": token,
+		// "user_role": role,
 	})
 }

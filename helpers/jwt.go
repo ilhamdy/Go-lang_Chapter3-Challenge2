@@ -8,20 +8,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var secretKey = "rahasia"
+const secretKey = "rahasia"
 
-func GenerateToken(id uint, email string, role string) (string, string) {
+func GenerateToken(id uint, email string) string {
 	claims := jwt.MapClaims{
 		"id":    id,
 		"email": email,
-		"role":  role,
+		// "role":  role,
 	}
 
 	parseToken := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	signedToken, _ := parseToken.SignedString([]byte(secretKey))
 
-	return signedToken, role
+	return signedToken
 }
 
 func VerifyToken(c *gin.Context) (jwt.MapClaims, error) {
